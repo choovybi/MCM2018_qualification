@@ -1,0 +1,53 @@
+脚本代码：
+function [fitresult, gof] = createFit1(xx, y1)
+%CREATEFIT1(XX,Y1)
+%  Create a fit.
+%
+%  Data for 'weather' fit:
+%      X Input : xx
+%      Y Output: y1
+%  Output:
+%      fitresult : a fit object representing the fit.
+%      gof : structure with goodness-of fit info.
+%
+%  另请参阅 FIT, CFIT, SFIT.
+
+%  由 MATLAB 于 03-Aug-2018 13:33:27 自动生成
+
+
+%% Fit: 'weather'.
+[xData, yData] = prepareCurveData( xx, y1 );
+
+% Set up fittype and options.
+ft = fittype( 'fourier8' );
+opts = fitoptions( 'Method', 'NonlinearLeastSquares' );
+opts.DiffMaxChange = 1;
+opts.DiffMinChange = 1e-10;
+opts.Display = 'Off';
+opts.MaxFunEvals = 600000;
+opts.MaxIter = 400000;
+opts.Robust = 'Bisquare';
+opts.StartPoint = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0034032147906186];
+opts.TolFun = 1e-10;
+opts.TolX = 1e-10;
+
+% Fit model to data.
+[fitresult, gof] = fit( xData, yData, ft, opts );
+
+% Plot fit with data.
+figure( 'Name', 'weather' );
+h = plot( fitresult, xData, yData );
+legend( h, 'y1 vs. xx', 'weather', 'Location', 'NorthEast' );
+% Label axes
+xlabel xx
+ylabel y1
+grid on
+
+命令行代码：
+>> x=[1:1478];
+>> x=x';
+>> y=TOKYO.H;
+>> plot(x,y)
+>> hold on
+>> yy=19.2+0.01111*cos(x*0.003556)+2.645*sin(x*0.003556)+0.2115*cos(2*x*0.003556)-0.1578*sin(2*x*0.003556)+1.892*cos(3*x*0.003556)+5.833*sin(3*x*0.003556)+1.086*cos(4*x*0.003556)+8.983*sin(4*x*0.003556)-6.413*cos(5*x*0.003556)-7.679*sin(5*x*0.003556)+0.3105*cos(6*x*0.003556)-1.226*sin(6*x*0.003556)+0.4755*cos(7*x*0.003556)-0.1764*sin(7*x*0.003556)+0.412*cos(8*x*0.003556)+0.3943*sin(8*x*0.003556)*2.645;
+>> plot(x,yy)

@@ -24,7 +24,7 @@ x_train = x_train.fillna(method='pad')
 #print('Best parameters:')
 #print(clf.best_params_)
 
-rf=RandomForestRegressor(max_depth=None,random_state=None,min_samples_leaf=1,n_estimators=200)
+rf=RandomForestRegressor(max_depth=None,random_state=None,min_samples_leaf=1,n_estimators=130)
 rf.fit(x_train,y_train)
 
 y_need = pd.read_csv('2.csv',header=None,sep=',')
